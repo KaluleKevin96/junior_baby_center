@@ -1,0 +1,142 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		title  Baby Sitter Home 
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', type='text/css', media='screen', href='css/bootstrap.css')
+		link(rel='stylesheet', type='text/css', media='screen', href='css/fontawesome/css/all.css')
+		// <link rel='stylesheet' type='text/css' media='screen' href='css/fontawesome/css/fontawesome.min.css'>
+		link(rel='stylesheet', type='text/css', media='screen', href='css/custom.css')
+	body
+		header.jbc-header
+			nav.navbar.navbar-expand-lg.navbar-light.bg-jbc
+				a.navbar-brand(href='#', style='width:10%')
+					img(src='images/jbc/babyLogo3.png', alt='JBC Logo', title='WELCOME TO JUNIOR BABY CENTER')
+				button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+					span.navbar-toggler-icon
+				.welcome_title
+					i.fa.fa-baby
+					|  WELCOME TO JUNIOR BABY CENTER 
+					i.fa.fa-baby
+				.login-button.ml-auto.float-right
+					a.btn.btn-info.btn-md(href='#', data-toggle='modal', data-target='#loginModal')  LOG IN 
+		.container-fluid
+			.row
+				.col-md-8.col-8.main_section(style="background-image: url('./images/jbc/babybg.jpg'); background-size: cover; background-position:center; min-height:805px; ")
+					.container
+						#pendingAppointments.row.justify-content-center
+							.col-md-12
+								//
+									<span class="alert_content alert-success" id="alert_content"> </span>
+									<br/>
+									<span class="alert_content alert-info" id="reset_content"> </span>
+								.card.border-info
+									.card-header.text-center
+										| ALL YOUR APPOINTMENTS
+									.card-body
+										h5.card-title
+											| These are all appointments that you have been assigned to , awaiting your approval
+										.table.table-responsive
+											table.table.table-hover.table-fixed
+												thead
+													tr
+														th.col-2(scope='col') CLIENT'S NAME
+														th.col-2(scope='col')  CONTACT
+														th.col-2(scope='col') CHILD'S NAME
+														th.col-2(scope='col') DATE 
+														th.col-2(scope='col')  DURATION 
+												tbody
+													tr
+														td.col-2(scope='row')  Parent A 
+														td.col-2(scope='col')  0772469195 
+														td.col-2(scope='row')  Child A 
+														td.col-2  05-12-2019
+														td.col-2  2 hours 
+														td.col-1
+															a.btn.btn-success.btn-sm(href='#', title='Approve Booking')
+																i.fa.fa-thumbs-up
+														td.col-1
+															a.btn.btn-danger.btn-sm(href='#', title='Reject Booking')
+																i.fa.fa-thumbs-down
+				.col-md-4.col-4.right_section
+					.container.right_section_content
+						//
+							<h2> LOG IN </h2>
+							<form class="form login-form" action="#" >
+							<div class="image">
+							<img src="images/toyota-logo(small).png" alt="TOYOTA LOGO" />
+							</div>
+							<div class="form-group">
+							<input type="text" name="username" id="username" placeholder="Enter Username" class="form-control">
+							</div>
+							<div class="form-group">
+							<input type="password" name="username" id="password" placeholder="Enter Password" class="form-control">
+							</div>
+							<div class="form-group">
+							<span class="text-left">
+							<button type="submit" id="login_button" class="btn btn-md btn-login"> LOG IN </button>
+							</span>
+							<span class="pl-5">
+							<button type="reset" id="reset_button" class="btn btn-md btn-login" > RESET </button>
+							</span>
+							</div>
+							</form>
+						h5  Hi, {Logged In Official Name} 
+						// sidebar menu that is acessible by officials and staff
+						.sidebar_menu
+							// Sidebar
+							nav#sidebar
+								.sidebar-header
+									// <h3>Bootstrap Sidebar</h3>
+								ul.list-unstyled.components
+									li
+										a(href='#') Home
+									li.active
+										a.dropdown-toggle(href='#appointmentsSubmenu', data-toggle='collapse', aria-expanded='false') Appointments
+										ul#appointmentsSubmenu.collapse.list-unstyled.submenu
+											li
+												a(href='#')  All Appointments 
+											li
+												a(href='#')  Book Appointment 
+									li
+										a.dropdown-toggle(href='#customersSubmenu', data-toggle='collapse', aria-expanded='false') Customers
+										ul#customersSubmenu.collapse.list-unstyled.submenu
+											li
+												a(href='#') All Customers
+											li
+												a(href='#') Register New Customer
+									li
+										a.dropdown-toggle(href='#sittersSubmenu', data-toggle='collapse', aria-expanded='false') Sitters
+										ul#sittersSubmenu.collapse.list-unstyled.submenu
+											li
+												a(href='#') All Sitters
+											li
+												a(href='#') Register New Sitter
+		// THE POP UP BOOTSTRAP MODALS
+		// Log In Modal
+		#loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+			.modal-dialog.modal-dialog-centered(role='document')
+				.modal-content
+					.modal-header
+						h5#loginModalLongTitle.modal-title.text-center  WELCOME 
+						button.close(type='button', data-dismiss='modal', aria-label='Close')
+							span(aria-hidden='true') ×
+					form.form.jbc_login_form(action='#', method='POST')
+						.modal-body
+							.form-group
+								label.float-left.pt-3.pr-4(for='email')  Email
+								input.form-control(type='email', placeholder='Enter your Email')
+							.form-group.mt-5
+								label.float-left.pt-3(for='password') Password
+								input.form-control(type='password', placeholder='Type your password')
+						.modal-footer
+							// <p style="color: rgb(61, 25, 25)">Forgot Password? <a href="#">Reset here</a> </p>
+							button.btn.btn-primary.btn-md(type='submit') Login
+							button.btn.btn-danger(type='reset', data-dismiss='modal') Cancel
+		// end of login modal
+		// THE END OF THE POP UPS
+		script(src='js/jquery-3.3.1.slim.min.js')
+		script(src='js/popper.min.js')
+		script(src='js/bootstrap.min.js')

@@ -1,0 +1,387 @@
+body {
+    padding: 0% 0% 0% 0%;
+    margin: 0% auto 0% auto;
+}
+
+.bg-fb {
+    background-color: #3D5998;
+}
+
+.navbar-brand img {
+    width: 45%;
+    border-radius: 10%;
+}
+
+.title {
+    font-size: 180%;
+    padding: 5%;
+    font-family: Roboto, Monserrat, Verdana, Open Sans, sans-serif;
+}
+
+.info-block {
+    font-size: 110%;
+    color: lightslategray;
+    margin: 0% 10%;
+    font-family: sans-serif, open sans, Times New Roman;
+}
+
+.help-block {
+    color: lightslategray;
+    font-size: 80%;
+    font-family: cursive, comic sans;
+}
+
+.content {
+    margin: 5% 0% 0% 15%;
+    /* background-color:slategray;*/
+}
+
+.right_column {
+    border: 15px solid #3D5998;
+    padding: 4.5%;
+    border-radius: 5%;
+}
+
+.left_column {
+    border: 15px solid #3D5998;
+    padding: 3.5%;
+    margin-right: -1%;
+    border-radius: 5%;
+}
+
+.search_form .form-control {
+    border: 3px solid #ced4da;
+}
+
+.search_form label {
+    font-family: Times New Roman, Verdana, sans-serif;
+    font-size: 120%;
+    font-weight: bold;
+}
+
+/*---------------------------------------- BABY FORM ASSIGNMENT STYLES -------------------------------------------------------*/
+.slide img{
+
+    height:100%;
+
+}
+
+.jbc-header {
+    top: 0;
+    position: sticky;
+    width: 100%;
+    border-bottom: 5px solid #3D5998;
+    z-index: 1;
+}
+
+.bg-jbc {
+    /* background-color: rgba(251, 206, 176, 0.5);  */
+    background-color: #fbceb0;
+}
+
+.welcome_title {
+    color: #3D5998;
+    font-size: 200%;
+    font-weight: bold;
+    font-family: "Avenir 95 Black", Roboto, Monserrat, Verdana, Open Sans, sans-serif;
+    width: 80%;
+}
+
+.welcome_title i {
+    
+    font-size:120%;
+    padding: 0% 5%;
+}
+
+.login_button {
+    
+    width : auto;
+}
+
+.right_section {
+    height: 100%;
+    /* background-color: rgba(251, 206, 176, 0.5); */
+    background-color: #fbceb0;
+    border-left: 5px solid #3D5998;
+    position: fixed;
+    /* float: right; */
+    right: 0;
+    padding: 0% 0% 0% 0%;
+    z-index: 1;
+}
+
+.right_section_content {
+    text-align: justify;
+    /* padding: 10% 8%; */
+    padding:5%;
+}
+
+.right_section_content h2 {
+    padding-top: 5%;
+    font-family: "Avenir 95 Black", Verdana, Geneva, Tahoma, sans-serif, Roboto, Monserrat, "Open Sans";
+    font-size: 230%;
+    font-weight: bolder;
+    color: brown;
+}
+
+.right_section_content h5 {
+    
+    font-family: cursive , monospace, 'Courier New', Courier, "Times New Roman", serif;
+    font-size:200%;
+    padding:2.5%;
+}
+
+.right_section_content h6 {
+    
+    font-family: 'Times New Roman', monospace, 'Courier New', Courier, Times, serif;
+    font-size:160%;
+}
+
+.right_section_content ul.advantages{
+    
+        
+}
+
+/*.advantages li {
+    
+    list-style: none;
+    margin-bottom:5%;
+
+}*/
+
+.right_section_content ul li {
+  /* color:white; */
+  /* padding-left: 1.3em; */
+/*  padding-bottom : 1em;*/
+    list-style: none;
+    margin-bottom:7%;
+    /* color: #003679; */
+}
+
+/* .right_section_content ul li:before {
+
+  font-family: FontAwesome;
+  content: "\f0a4"; /* f00c f0a6 *
+  display: inline-block;
+  margin-left: -1.3em; 
+  width: 1.3em; 
+  color: #003679; /* 86c349 *
+}  */
+
+.right_section_content ul li span.fa-li i {
+
+    color: #003679;
+}
+
+.advantages li .number {
+    
+    font-size:120%;
+    font-weight: bolder;
+}
+
+.right_section_content .book_appointment_button {
+    
+    margin-top:10%;
+}
+
+.modal-header h5{
+    padding-left:30%;
+    color: #3D5998;
+    font-size: 150%;
+    font-weight: bold;
+    font-family: "Avenir 95 Black", Roboto, Monserrat, Verdana, Open Sans, sans-serif;
+}
+
+.jbc_login_form {
+    align-content: center;
+}
+
+.jbc_login_form .image img {
+    width: 60%;
+    border-radius: 3.2%;
+    padding: 5% 0%;
+}
+
+.jbc_login_form input {
+    
+    margin: 0 auto;
+    padding: 5% 5%;
+    width: 70%;
+    border-top:none;
+    border-right:none;
+    border-left:none;
+    border-bottom:2px solid navy;
+    
+    color: black;
+}
+
+.jbc_login_form input:focus {
+    border: 4px solid #3D5998;
+    box-shadow: none;
+}
+
+jbc_login_form label {
+    
+    font-size: 120%;
+    font-weight: 600;
+    font-family: cursive,"Courier New", Century;
+/*    text-align: center;*/
+    
+}
+
+.customer_ref_form .form-control {
+    
+    padding:2%;
+    font-size:80%;
+    color: #fff;
+    background-color:inherit !important;
+    border-bottom:3px solid navy;
+}
+
+.customer_ref_form .form-control:focus {
+    
+    color: #3D5998;
+    background-color:whitesmoke !important;
+    border-bottom: 3px solid #3D5998;
+}
+
+.jbc_form .form-control:focus {
+    border-top:none;
+    border-right:none;
+    border-left:none;
+    box-shadow: none;
+
+    color: #3D5998;
+    /* background-color:whitesmoke !important; */
+    border-radius:0%;
+    border-bottom: 5px solid #3D5998;
+}
+
+.btn-login {
+    color: #fff;
+    background-color: #3D5998;
+    border-color: #3D5998;
+}
+
+.btn-login:hover {
+    
+    color: #3D5998;
+    font-weight: bold;
+    background-color: aliceblue;
+    border-color: #3D5998;
+}
+
+.main_section {
+    /* border:2px solid green; */
+    padding: 2.5% 2.5%;
+    /* height: 100%; */
+    margin:0;
+}
+
+.alert_content {
+    font-size: 150%;
+    font-family: 'Times New Roman', monospace, 'Courier New', Courier, Times, serif;
+    padding: 3%;
+    width: 40%;
+}
+
+.card-header{
+    color: #3D5998;
+    font-size: 150%;
+    font-weight: bold;
+    font-family: "Avenir 95 Black", Roboto, Monserrat, Verdana, Open Sans, sans-serif;
+}
+
+/*styles to fix the headers of the different tables to which class table-fixed is attached */
+
+.table-fixed tbody {
+    max-height: 500px;
+    overflow-y: auto;
+    width: 100%;
+    /* border:3px solid red; */
+}
+
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+    display: block;
+}
+
+.table-fixed tbody td,
+.table-fixed tbody th,
+.table-fixed thead > tr > th {
+    float: left;
+    position: relative;
+/* 
+    &::after {
+        content: '';
+        clear: both;
+        display: block;
+    } */
+}
+
+#sidebar{
+    width:70%;
+    text-align :center;
+}
+
+.sidebar_menu{
+
+    align-items:stretch;
+    margin-left:20%;
+}
+
+.sidebar_menu nav ul li{
+
+    /* text-align: right; */
+    margin:5% 0%;
+    padding:2% 5%;
+    border-bottom: 1px solid navy;
+
+}
+
+.sidebar_menu nav ul li a{
+
+    width:100%;
+    font-size:125%;
+    color: navy;
+
+    
+}
+
+.sidebar_menu nav ul li:hover {
+
+    background-color: navy;
+    border-bottom: 5px solid #fff;
+}
+
+.sidebar_menu nav ul li a:hover , .sidebar_menu nav ul li:hover a{
+
+    color:#fff;  
+    text-decoration: none;;
+
+}
+
+.submenu li a{
+
+    color:#fff;
+}
+
+.submenu li a:hover{
+
+    /* text-decoration: underline !important; */
+}
+
+/* --------------------------------- JBC ASSIGNMENT STYLES END HERE----------------------------------------------------*/
+
+/* 
+styles for later
+
+background-color: rgba(0,0,0, 0.4);
+
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+*/

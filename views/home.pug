@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    
+    .col-md-7.col-7.main_section(style='padding:0%; margin:0; background-color:navy; height:780px;')
+        #sliderControls.carousel.slide(data-ride='carousel')
+            .carousel-inner
+                .carousel-item.active
+                    img.d-block.w-100(src='./images/jbc/baby2.jpg', alt='JBC')
+                .carousel-item
+                    img.d-block.w-100(src='./images/jbc/baby3.jpg', alt='JBC')
+                .carousel-item
+                    img.d-block.w-100(src='./images/jbc/baby6.jpg', alt='JBC')
+                .carousel-item
+                    img.d-block.w-100(src='./images/jbc/baby1.jpg', alt='JBC')
+                .carousel-item
+                    img.d-block.w-100(src='./images/jbc/babybg5.jpg', alt='JBC')
+            a.carousel-control-prev(href='#sliderControls', role='button', data-slide='prev')
+                span.carousel-control-prev-icon(aria-hidden='true')
+                span.sr-only Previous
+            a.carousel-control-next(href='#sliderControls', role='button', data-slide='next')
+                span.carousel-control-next-icon(aria-hidden='true')
+                span.sr-only Next
+        
+				

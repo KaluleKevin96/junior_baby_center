@@ -1,0 +1,33 @@
+{
+  "name": "jbc",
+  "version": "1.0.0",
+  "description": "Refactory assignment to create a systen ti nabage junior baby center",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon index.js"
+  },
+  "author": "Kalule Kevin Kamanzi",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.7",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.10",
+    "multer": "^1.4.2",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "bcrypt": "^3.0.7",
+    "express-back": "0.0.2",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.0",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
+    "method-override": "^3.0.0",
+    "nodemon": "^1.19.4",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.1",
+    "serve-favicon": "^2.5.0"
+  }
+}

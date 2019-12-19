@@ -1,0 +1,73 @@
+extends layout
+
+block content
+  .col-md-7.col-7.main_section(style="background-image: url('/images/jbc/babybg7.jpg'); background-size: cover; background-position:center; height:805px; ")
+    .container
+      .row.justify-content-center
+        .col-md-12
+
+          .card.border-primary
+            .card-header.text-center
+              | BOOK SITTER
+              span.float-right(style='font-size:70%;')
+                | CUSTOMER REF. NUMBER : 
+                span.ref_number.text-info  #{customer.customer_id}
+            .card-body
+              h5.card-title Please Fill In The Details Below To Book A Sitter
+              form.form.jbc_booking_form.jbc_form(action='/jbc_appointments/book_appointment', method='POST')
+                // <input type="hidden" name="parent_name" />
+                input(type='hidden', name='customer_id', value=customer.customer_id )
+                input(type='hidden', name='parent_contact', value=customer.phone_contact )
+                input(type='hidden', name='place_of_residence', value=customer.placeOfResidence )
+                .row
+                  .form-group.col-md-6.col-6
+                    label.label(for='parent_name')  Name of The Parent 
+                    input.form-control(name='name_of_parent', type='text', value= customer.last_name+' '+customer.first_name, readonly='')
+                  .form-group.col-md-6.col-6
+                    label.label(for='child_name')  Name of The Child 
+                    input.form-control(name='child_name', type='text', placeholder='eg John Doe...')
+                .row
+                  .form-group.col-md-4.col-4
+                    label.label(for='club')  Club 
+                    select#club.form-control(name='club')
+                      // <option value=""> Select Club  </option>
+                      option(value='morning')  Morning 
+                      option(value='afternoon')  Afternoon 
+                      option(value='evening')  Evening 
+                      option(value='night')  Night 
+                    small.form-text.text-muted
+                      | The time of the day you would like to book the sitter for 
+                      br
+                      | Could be 
+                      b Morning
+                      |  , 
+                      b Afternoon
+                      |  , 
+                      b  Evening 
+                      |  or  
+                      b Night
+                  .form-group.col-md-4.col-4.offset-2
+                    label.label(for='date_of_appointment')  Date of Appointment 
+                    input#date_of_appointment.form-control(type='date', name='date_of_appointment')
+                    small.form-text.text-muted  The date on which to book a sitter 
+                .row
+                  .form-group.col-md-3.col-3
+                    label.label(for='time')  Start Time 
+                    input.form-control(type='time', name='time')
+                    small.form-text.text-muted  The time at which you would like the sitter to arrive 
+                  .form-group.col-md-3.col-3
+                    label.label(for='duration')  Duration 
+                    input#duration.form-control(type='number', min='1', max='8', name='duration')
+                  .form-group.col-md-3.col-3
+                    label.label(for='final_bill')  Bill 
+                    input#final_bill.form-control(type='number', min='0', value="" , name='final_bill', readonly='')
+                .row
+                  .col-5.offset-6
+                    .row
+                      small.card-text.text-muted.pb-3
+                        | If you are sure about the information you have entered into the form, go ahead and click on the "BOOK NOW" button to submit.
+                      br
+                      .form-group.col-md-6.col-6
+                        button.btn.btn-primary.btn-md(type='submit') BOOK NOW 
+                      .form-group.col-md-4.col-4
+                        button.btn.btn-danger(type='reset') CANCEL

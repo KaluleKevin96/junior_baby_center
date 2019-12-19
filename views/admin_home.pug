@@ -1,0 +1,141 @@
+extends layout
+
+block content
+  .col-md-7.col-7.main_section(style="background-image: url('/images/jbc/babybg.jpg'); background-size: cover; background-position:center; min-height:805px; ")
+    .container
+      #pendingAppointments.row.justify-content-center
+        .col-md-12
+          //
+            <span class="alert_content alert-success" id="alert_content"> </span>
+            <br/>
+            <span class="alert_content alert-info" id="reset_content"> </span>
+          .card.border-info
+            .card-header.text-center
+              | ALL 
+              span.text-info "PENDING"
+              |  APPOINTMENTS
+            .card-body
+              h5.card-title
+                | These are all appointments that have been requested , select a sitter from the drop down list to assign to the appointment
+              .table.table-responsive
+                table.table.table-hover.table-fixed
+                  thead
+                    tr
+                      th.col-2(scope='col') CLIENT'S NAME
+                      th.col-2(scope='col') CHILD'S NAME
+                      th.col-1(scope='col') CLUB 
+                      th.col-3(scope='col') SITTER'S NAME
+                      th.col-1(scope='col') DATE 
+                      th.col-1(scope='col')  BILL 
+                  tbody
+                    
+                    each appointment in pending_appointments
+                        tr
+                            form.approve_booking_form
+                            td.col-2(scope='row')  #{appointment.name_of_parent}
+                            td.col-2(scope='row')  #{child_name}
+                            td.col-1(scope='row')  #{club} 
+                            td.col-3 ASSIGN SITTER                                  
+                            td.col-1 #{date_of_appointment}
+                            td.col-1 #{bill} 
+                            td.col-1
+                                input(type='hidden', name='appointmentID', value='#{appointment.appointmentID}')
+                                button.btn.btn-success.btn-sm(type='submit', name='approve_booking', title='Approve Booking')
+                                i.fa.fa-thumbs-up
+                            td.col-1
+                                a.btn.btn-danger.btn-sm(href='#', title='Reject Booking')
+                                i.fa.fa-thumbs-down
+                    else
+                        tr
+                            td.col-12.text-center.text-danger(scope="col" colspan="6") NO APPOINTMENTS TO APPROVE
+                    
+      br
+      br
+      #approvedAppointments.row.justify-content-center
+        .col-md-12
+          //
+            <span class="alert_content alert-success" id="alert_content"> </span>
+            <br/>
+            <span class="alert_content alert-info" id="reset_content"> </span>
+          .card.border-success
+            .card-header.text-center
+              | ALL 
+              span.text-success "APPROVED / ACTIVE"
+              |  APPOINTMENTS
+            .card-body
+              h5.card-title These are all active and/or approved appointments 
+              .table.table-responsive
+                table.table.table-hover.table-fixed
+                  thead
+                    tr
+                      th.col-2(scope='col') CLIENT'S NAME
+                      th.col-2(scope='col') CHILD'S NAME
+                      th.col-1(scope='row')  CLUB 
+                      th.col-2(scope='col') SITTER'S NAME
+                      th.col-1(scope='col') DATE 
+                      th.col-2(scope='col') DURATION 
+                      th.col-1(scope='col')  BILL 
+                  tbody
+                    each appointment in approved_appointments
+                        tr
+                            td.col-2(scope='row')  #{appointment.name_of_parent}
+                            td.col-2(scope='row')  #{appointment.child_name} 
+                            td.col-1(scope='row')  #{appointment.club} 
+                            td.col-2  #{appointment.sitter_assigned}
+                            td.col-1  #{appointment.date_of_appointment}
+                            td.col-2  #{appointment.duration}
+                            td.col-1  #{appointment.bill} 
+                            td.col-1
+                                a.btn.btn-danger.btn-sm(href='#', title='Cancel Booking')
+                                i.fa.fa-times-circle
+                    else
+                        tr
+                            td.col-12.text-center.text-danger(scope="col" colspan="7") NO ACTIVE APPOINTMENTS
+      br
+      br
+      #sitters.row.justify-content-center
+        .col-md-12
+          //
+            <span class="alert_content alert-success" id="alert_content"> </span>
+            <br/>
+            <span class="alert_content alert-info" id="reset_content"> </span>
+          .card.border-primary
+            .card-header.text-center
+              | ALL REGISTERED SITTERS
+            .card-body
+              h5.card-title
+                | These are all registered and active sitters
+                a.float-right.btn.btn-primary.btn-md(href='#', title='REGISTER NEW SITTER')  Register New Sitter 
+              br
+              .table.table-responsive
+                table.table.table-hover.table-fixed
+                  thead
+                    tr
+                      th.col-2(scope='col') SITTER ID
+                      th.col-2(scope='col') SITTER'S NAME
+                      th.col-2(scope='col') CONTACT
+                      th.col-2(scope='col') EMAIL
+                      th.col-2(scope='col') CLUB
+                  tbody
+                    each sitter in registered_sitters
+                        tr
+                            td.col-2(scope='row')  #{sitter.sitter_id} 
+                            td.col-2  #{sitter.last_name} #{sitter.first_name} 
+                            td.col-2  #{sitter.phone_contact}  
+                            td.col-2  #{sitter.email} 
+                            td.col-2  #{sitter.club}  
+                            td.col-1
+                                a.btn.btn-primary.btn-sm(href='#', title='Edit')
+                                i.fa.fa-edit
+                            td.col-1
+                                a.btn.btn-danger.btn-sm(href='#', title='De-activat')
+                                i.fa.fa-trash
+                    else
+                        tr
+                            td.col-12.text-center.text-danger(scope="col" colspan="7") NO ACTIVE SITTERS REGISTERED
+
+    // end of  modal
+    // THE END OF THE POP UPS
+    script(src='js/jquery-3.3.1.slim.min.js')
+    script(src='js/popper.min.js')
+    script(src='js/bootstrap.min.js')

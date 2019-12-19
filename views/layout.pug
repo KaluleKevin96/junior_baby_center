@@ -1,0 +1,358 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title  #{title} 
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', type='text/css', media='screen', href='/css/bootstrap.css')
+    link(rel='stylesheet', type='text/css', media='screen', href='/css/fontawesome/css/all.css')
+    link(rel='stylesheet' type='text/css' media='screen' href='/css/fontawesome/css/fontawesome.min.css')
+    link(rel='stylesheet', type='text/css', media='screen', href='/css/custom.css')
+  body
+    header.jbc-header
+      nav.navbar.navbar-expand-lg.navbar-light.bg-jbc
+        a.navbar-brand(href='/', style='width:10%')
+          img(src='/images/jbc/babyLogo3.png', alt='JBC Logo', title='WELCOME TO JUNIOR BABY CENTER')
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+
+        .welcome_title.text-center
+          i.fa.fa-baby
+          |  WELCOME TO JUNIOR BABY CENTER 
+          i.fa.fa-baby
+        div.login-button
+          if (administrators != undefined || registered_admin != undefined)
+            if (user || loggedin_staff != undefined)
+              div.collapse.navbar-collapse.logged_in_user_dropdown#navbarSupportedContent
+                ul.navbar-nav.ml-auto
+                  li.nav-item.dropdown
+                    a.nav-link.dropdown-toggle.text-uppercase#navbarDropdown(role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{user.last_name} #{user.first_name}
+                    div.dropdown-menu(aria-labelledby="navbarDropdown")
+                      a.dropdown-item(href="#")
+                        | Edit your profile &nbsp;
+                        i.fa.fa-edit
+                      if (user)                                    
+                        a.dropdown-item(href="/jbc_administrators/admin_logout")
+                          | Logout &nbsp;
+                          i.fas.fa-sign-out-alt
+                      else if (loggedin_staff != undefined)
+                        a.dropdown-item(href="/jbc_sitters/sitter_logout")
+                          | Logout &nbsp;
+                          i.fas.fa-sign-out-alt
+            else
+              a.btn.btn-info.btn-md(href='#', data-toggle='modal', data-target='#loginModal')  LOG IN    
+          else
+            a.btn.btn-primary.btn-lg(href='#', data-toggle='modal', data-target='#adminRegisterModal')  REGISTER
+    .container-fluid
+      .row
+
+        block content
+
+        .col-md-5.col-5.right_section
+          .container.right_section_content
+            if (user || loggedin_staff != undefined || customer != undefined)
+
+              if (user)
+                h5  Hi, #{user.last_name} #{user.first_name}
+                // sidebar menu that is acessible by officials and staff 
+                .sidebar_menu
+                  // Sidebar
+                  nav#sidebar
+                  .sidebar-header
+                    // <h3>Bootstrap Sidebar</h3>
+                  ul.list-unstyled.components
+                    li
+                    a(href='#') Home
+                    li.active
+                    a.dropdown-toggle(href='#appointmentsSubmenu', data-toggle='collapse', aria-expanded='false') Appointments
+                    ul#appointmentsSubmenu.collapse.list-unstyled.submenu
+                      li
+                      a(href='#')  All Appointments 
+                      li
+                      a(href='#', data-toggle='modal', data-target='#customerRefModal')  Book Appointment 
+                    li
+                    a.dropdown-toggle(href='#customersSubmenu', data-toggle='collapse', aria-expanded='false') Customers
+                    ul#customersSubmenu.collapse.list-unstyled.submenu
+                      li
+                      a(href='#') All Customers
+                      li
+                      a(href='#', data-toggle='modal', data-target='#registerModal') Register New Customer
+                    li
+                    a.dropdown-toggle(href='#staffSubmenu', data-toggle='collapse', aria-expanded='false') Staff
+                    ul#staffSubmenu.collapse.list-unstyled.submenu
+                      li
+                      a(href='#') All Staff
+                      li
+                      a(href='#', data-toggle='modal', data-target='#staffRegisterModal') Register New Staff
+
+              else if (loggedin_staff)
+
+              else if (customer && past_bookings)
+
+                h5  Hi, #{customer.last_name} #{customer.first_name} , Have a look at your past bookings; 
+                .table-responsive.past_bookings
+                  table.table.table-hover.table-fixed
+                    thead
+                      tr
+                        th.col-4(scope='col') CHILD'S NAME
+                        th.col-4(scope='col') SITTER'S NAME
+                        th.col-2(scope='col') DATE 
+                        th.col-2(scope='col')  THE BILL 
+                    tbody
+                      each booking in past_bookings
+                        tr
+                          td.col-4(scope='row') #{booking.child_name}
+                          td.col-4  #{booking.sitter_assigned}
+                          td.col-2  #{booking.date_of_appointment}
+                          td.col-2  #{booking.bill} 
+                      else
+                        tr
+                          td.col-12(scope='row' colspan ="4") YOU HAVE NOT HAD ANY PAST BOOKINGS
+
+
+            else 						
+              h5  Looking for a sitter you can trust ? 
+              h6
+                | You have come to the right place 
+                br
+                br
+                ul.advantages.fa-ul
+                  li
+                    span.fa-li
+                      i.fas.fa-thumbs-up
+                    |  Full transparency 
+                    br
+                    |  You can see all information about our professional sitters
+                  li
+                    span.fa-li
+                      i.fas.fa-thumbs-up
+                    | One time only Registration Free !!! 
+                    br
+                    |  Please feel free to register with us and then go on to book a Sitter 
+                    br
+                    a.btn.btn-md.btn-success(href='#', data-toggle='modal', data-target='#registerModal')  REGISTER HERE 
+                  li
+                    span.fa-li
+                      i.fas.fa-thumbs-up
+                    | If you've ever registered with or called us, Even better !!
+                    br
+                    | Just go ahead to book a Sitter with the Customer Ref. Number you were assigned after registration
+                    br
+                    form.form.customer_ref_form.mt-3(action='/jbc_appointments/customer_book_appointment', method='POST')
+                      .row
+                        .col-md-6
+                          input.form-control(type='text', name='customer_id', placeholder='Your Customer Ref. Number')
+                        .col-md-3
+                          input.btn.btn-block.btn-primary(type='submit', name='registered_customer_book_button', value='BOOK NOW')
+                  li
+                    span.fa-li
+                      i.fas.fa-thumbs-up
+                    | Don't feel like going throught the hassle of registration ?
+                    br
+                    |  That's okay, Just give us a call on 
+                    span.number  +256 414 123456 
+                    br
+                    |  And book a Sitter from us.
+
+        // THE POP UP BOOTSTRAP MODALS
+        // Log In Modal
+        #loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+          .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+              .modal-header
+                h5#loginModalLongTitle.modal-title.text-center  WELCOME 
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                  span(aria-hidden='true') ×
+              form.form.jbc_login_form(action='/jbc_administrators/admin_login', method='POST')
+                .modal-body
+                  .form-group
+                    label.float-left.pt-3.pr-4(for='email')  Email
+                    input.form-control(type='email', placeholder='Enter your Email')
+                  .form-group.mt-5
+                    label.float-left.pt-3(for='password') Password
+                    input.form-control(type='password', placeholder='Type your password')
+                .modal-footer
+                  // <p style="color: rgb(61, 25, 25)">Forgot Password? <a href="#">Reset here</a> </p>
+                  button.btn.btn-primary.btn-md(type='submit') Login
+                  button.btn.btn-danger(type='reset', data-dismiss='modal') Cancel
+        // end of login modal
+        // Customer Register Modal
+        #registerModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='registerModalCenterTitle', aria-hidden='true')
+          .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+              .modal-header(style="width:100%;")
+                h5#loginModalLongTitle.modal-title(style="padding-left:2%; width:100%;") CUSTOMER REGISTRATION 
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                  span(aria-hidden='true') ×
+              form.form.jbc_register_form.jbc_form(action="/jbc_customers/register_customer" method="POST")
+                .modal-body
+                  .row
+                    .form-group.col-md-6.col-6
+                      label.label(for='first_name')  First Name
+                      input.form-control(name='first_name', type='text', placeholder='eg John...')
+                    .form-group.col-md-6.col-6
+                      label.label(for='last_name')  Last Name 
+                      input.form-control(type='text', name='last_name', placeholder='eg Doe....')
+                  .row
+                    .form-group.col-md-3.col-3
+                      label.label(for='phone_contact')  Phone Contact
+                      input.form-control(name='phone_contact', type='tel', placeholder='eg 0772123456...')
+                      small.text-muted  A phone number that we can always reach you on
+                    .form-group.col-md-4.col-4
+                      label.label(for='email')  Email 
+                      input.form-control(type='email', name='email', placeholder='eg example@gmail.com....')
+                    .form-group.col-md-5.col-5
+                      label.label(for='placeOfResidence')  Place of Residence 
+                      input.form-control(type='text', name='placeOfResidence', placeholder='eg Muyenga Plot No.1....')
+                .modal-footer
+                  // <p style="color: rgb(61, 25, 25)">Forgot Password? <a href="#">Reset here</a> </p>
+                  button.btn.btn-success.btn-md(type='submit') REGISTER 
+                  button.btn.btn-danger(type='reset', data-dismiss='modal') CANCEL
+
+
+        // First Time Admin Register Modal
+        #adminRegisterModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='adminRegisterModalCenterTitle', aria-hidden='true')
+          .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+            .modal-content
+              .modal-header(style="width:100%;")
+                h5.modal-title(style="padding-left:2%; width:100%;")  FIRST TIME REGISTRATION 
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') 
+                  i.fa.fa-times
+              form.form.jbc_register_form.jbc_form(action='/jbc_administrators/register_admin', method='POST')
+                .modal-body
+                  .row
+                    .form-group.col-md-6.col-6
+                      label.label(for='first_name')  First Name
+                      input.form-control(name='first_name', type='text', placeholder='eg John...')
+                    .form-group.col-md-6.col-6
+                      label.label(for='last_name')  Last Name 
+                      input.form-control(type='text', name='last_name', placeholder='eg Doe....')
+                  .row
+                    .form-group.col-md-3.col-3
+                      label.label(for='phone_contact')  Phone Contact
+                      input.form-control(name='phone_contact', type='tel', placeholder='eg 0772123456...')
+                      small.text-muted  A phone number that you can always be reached on
+                    .form-group.col-md-4.col-4
+                      label.label(for='email')  Email 
+                      input.form-control(type='email', name='email', placeholder='eg example@gmail.com....')
+                    .form-group.col-md-5.col-5
+                      label.label(for='password')  Password
+                      input.form-control(type='password', name='password')
+                .modal-footer
+                  // <p style="color: rgb(61, 25, 25)">Forgot Password? <a href="#">Reset here</a> </p>
+                  button.btn.btn-success.btn-md(type='submit') REGISTER 
+                  button.btn.btn-danger(type='reset', data-dismiss='modal') CANCEL
+
+    // end of register modal
+
+      // Modal for admin to enter customer_ref number
+    #customerRefModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+      .modal-dialog.modal-dialog-centered(role='document')
+        .modal-content
+          .modal-header
+            h5#customerRefModalLongTitle.modal-title(style='padding:0%;')  CUSTOMER REF. NUMBER 
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') 
+                i.fa.fa-times
+          form.form.jbc_login_form(action='/jbc_appointments/customer_book_appointment', method='POST')
+            .modal-body
+              .form-group
+                label.float-left.pt-3.pr-4(for='customer_ref_number')  Enter the Client's Reference Number 
+                input.form-control(type='text', name="customer_id" , placeholder='Customer Reference Number')
+              .modal-footer
+                // <p style="color: rgb(61, 25, 25)">Forgot Password? <a href="#">Reset here</a> </p>
+                button.btn.btn-primary.btn-md(type='submit')  Next 
+                button.btn.btn-danger(type='reset', data-dismiss='modal') Cancel
+
+        // staff Register Modal either sitters or supervisors
+    #staffRegisterModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='staffRegisterModalCenterTitle', aria-hidden='true')
+      .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+          .modal-header
+            h5#staffRegisterModalLongTitle.modal-title.text-center  STAFF REGISTRATION 
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+          form.form.jbc_register_form.jbc_form(action='/jbc_customers/register_customer', method='POST')
+            .modal-body
+              .row
+                .form-group.col-md-6.col-6
+                  label.label(for='first_name')  First Name
+                  input.form-control(name='first_name', type='text', placeholder='eg John...')
+                .form-group.col-md-6.col-6
+                  label.label(for='last_name')  Last Name 
+                  input.form-control(type='text', name='last_name', placeholder='eg Doe....')
+              .row
+                .form-group.col-md-3.col-3
+                  label.label(for='contact')  Phone Contact
+                  input.form-control(name='contact', type='tel', placeholder='eg 0772123456...')
+                  small.text-muted  A phone number that we can always reach member on
+                .form-group.col-md-4.col-4
+                  label.label(for='email')  Email 
+                  input.form-control(type='email', name='email', placeholder='eg example@gmail.com....')
+                .form-group.col-md-5.col-5
+                  label.label(for='location')  Place of Residence 
+                  input.form-control(type='text', name='location', placeholder='eg Muyenga Plot No.1....')
+              .row
+                .form-group.col-md-3.col-3
+                  label.label(for='contact')  Club 
+                  select#club.form-control(name='club')
+                    option(value='Morning')  Morning 
+                    option(value='Afternoon')  Afternoon 
+                    option(value='Evening')  Evening
+                    option(value='Night')  Night 
+                  small.text-muted  The club they belong to 
+                .form-group.col-md-4.col-4
+                  label.label(for='password')  Password 
+                  input.form-control(type='password', name='password')
+                .form-group.col-md-5.col-5
+                  label.label(for='confirm_password')  Confirm Password 
+                  input.form-control(type='confirm_password', name='confirm_password')
+            .modal-footer
+              // <p style="color: rgb(61, 25, 25)">Forgot Password? <a href="#">Reset here</a> </p>
+              button.btn.btn-success.btn-md(type='submit') REGISTER 
+              button.btn.btn-danger(type='reset', data-dismiss='modal') CANCEL
+
+    // THE END OF THE POP UPS
+    script(src='/js/jquery-3.3.1.slim.min.js')
+    script(src='/js/popper.min.js')
+    script(src='/js/bootstrap.min.js')
+    script(type='text/javascript').
+        $(document).ready(function(){
+        var current_date = new Date();
+        var month = current_date.getMonth() + 1 , date = current_date.getDate();
+        $('#date_of_appointment').attr('min' , ((date < 10) ? '0' : '')+date+"/"+((month < 10) ? '0' : '')+month+"/"+current_date.getFullYear());
+        $('#final_bill').val(0);
+        var final_bill
+        $('#duration').keyup(function(event){
+        var duration = $('#duration').val();
+        var club = $('#club').val(); //getting the value of the club currently selected via the dropdown menu
+        if(duration != undefined || duration != 0 || duration != ''){
+        if(club == 'night'){ //if it is the night club selected
+        final_bill = (duration/2) * 12000;
+        }else{ //if it is any other club selected
+        final_bill = (duration/2) * 8500;
+        }
+        $('#final_bill').val(final_bill);
+        }else{
+        $('#final_bill').val(0);
+        }
+        })
+
+        $('#club').change(function(event){
+        var duration = $('#duration').val();
+        var club = $('#club').val(); //getting the value of the club currently selected via the dropdown menu
+        if(duration != undefined || duration != 0 || duration != ''){
+        if(club == 'night'){ //if it is the night club selected
+        final_bill = (duration/2) * 12000;
+        }else{ //if it is any other club selected
+        final_bill = (duration/2) * 8500;
+        }
+        $('#final_bill').val(final_bill);
+        }else{
+        $('#final_bill').val(0);
+        }
+        })
+        })
+
